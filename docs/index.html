@@ -338,7 +338,8 @@ h2.display{font-size:clamp(2.6rem,7vh,6rem)}
 <script src="https://cdn.jsdelivr.net/npm/reveal.js@4.6.0/dist/reveal.js"></script>
 <script>
 Reveal.initialize({
-  width: '100%', height: '100%',
+  width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+  height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0),
   margin: 0, center: false, controls: true,
   transition: 'fade', transitionSpeed: 'slow',
   progress: true, hash: true, controlsLayout: 'bottom-right',
@@ -411,6 +412,14 @@ function setupSlide(slide){
 
 Reveal.addEventListener('ready', e => setupSlide(e.currentSlide));
 Reveal.addEventListener('slidechanged', e => setupSlide(e.currentSlide));
+
+window.addEventListener('resize', () => {
+  Reveal.configure({
+    width: Math.max(document.documentElement.clientWidth, window.innerWidth || 0),
+    height: Math.max(document.documentElement.clientHeight, window.innerHeight || 0)
+  });
+  Reveal.layout();
+});
 </script>
 </body>
 </html>
